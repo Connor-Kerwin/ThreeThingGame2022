@@ -29,6 +29,9 @@ public class PlayerSelectionUIController : UIController
     private Button m_PlayButton;
 
     [SerializeField]
+    private Toggle m_randomToggle;
+
+    [SerializeField]
     private Color m_NotInUseColor;
     [SerializeField]
     private Color m_InUseColor;
@@ -137,6 +140,11 @@ public class PlayerSelectionUIController : UIController
         }
 
         Resolver.Resolve<ApplicationFlowStateMachine>().SetPlayerName(_newName, _playerNum);
+    }
+
+    public void Handle_PlayClicked()
+    {
+        Resolver.Resolve<ApplicationFlowStateMachine>().Handle_PlayClicked(m_randomToggle.isOn);
     }
 
     private void OnDestroy()
