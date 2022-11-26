@@ -6211,6 +6211,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5856861044863958787, guid: 27d3bf937710e0842a106d007d1c29df, type: 3}
+      propertyPath: m_ball
+      value: 
+      objectReference: {fileID: 259838950821199003, guid: 0c43bbe6b5f4651449f2ecc8ccf37345, type: 3}
+    - target: {fileID: 5856861044863958787, guid: 27d3bf937710e0842a106d007d1c29df, type: 3}
       propertyPath: m_golfBall
       value: 
       objectReference: {fileID: 259838950821199003, guid: 0c43bbe6b5f4651449f2ecc8ccf37345, type: 3}

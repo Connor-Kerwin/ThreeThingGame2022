@@ -14,6 +14,8 @@ public class HudUIController : UIController
 
     [SerializeField]
     private TMP_Text m_playersTurnLabel;
+    [SerializeField]
+    private TMP_Text m_turnsRemainingLabel;
 
     // Start is called before the first frame update
     private void Start()
@@ -41,11 +43,18 @@ public class HudUIController : UIController
         m_preGameUIRoot.SetActive(false);
         m_gameUIRoot.SetActive(true);
         Resolver.Resolve<ApplicationFlowStateMachine>().Handle_StartLevelClicked();
+        Handle_TurnsRemaining(Resolver.Resolve<LevelManager>().GetNumberOfTurns());
+    }
+
+    public void Handle_TurnsRemaining(int _turnsLeft)
+    {
+        m_turnsRemainingLabel.text = "Turns Left: " + _turnsLeft;
     }
 
     private void AttachLiseners()
     {
         Resolver.Resolve<ApplicationFlowStateMachine>().OnPlayerTurnChange += Handle_PlayerTurnChange;
+        Resolver.Resolve<ApplicationFlowStateMachine>().OnTurnsRemainingUpdated += Handle_TurnsRemaining;
     }
 
     private void DettachLiseners()
@@ -55,6 +64,7 @@ public class HudUIController : UIController
         try
         {
             Resolver.Resolve<ApplicationFlowStateMachine>().OnPlayerTurnChange -= Handle_PlayerTurnChange;
+        Resolver.Resolve<ApplicationFlowStateMachine>().OnTurnsRemainingUpdated -= Handle_TurnsRemaining;
         }
         catch { } 
     }
