@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4ea49a1070b1f489080f5ca1d42699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DestructionTime: 4
+  DestructionTime: 2
   OnBeforeDestroy:
     m_PersistentCalls:
       m_Calls:

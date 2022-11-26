@@ -115,8 +115,8 @@ FixedJoint:
   m_GameObject: {fileID: 2355969011767973627}
   m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_BreakForce: 65
-  m_BreakTorque: 65
+  m_BreakForce: 20
+  m_BreakTorque: 20
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
   m_MassScale: 1
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4ea49a1070b1f489080f5ca1d42699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DestructionTime: 4
+  DestructionTime: 2
   OnBeforeDestroy:
     m_PersistentCalls:
       m_Calls:
@@ -244,7 +244,7 @@ Transform:
   m_Children:
   - {fileID: 3168781490011130945}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7216240201997223727
 MonoBehaviour:
