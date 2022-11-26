@@ -24,6 +24,11 @@ public class CameraController : MonoBehaviour
         SetTrackingMode(TrackingMode.Static);
     }
 
+    private void Awake()
+    {
+        Resolver.Register<CameraController>(this);
+    }
+
     private void Update()
     {
         switch (mode)
@@ -69,6 +74,11 @@ public class CameraController : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private void OnDestroy()
+    {
+        Resolver.Unregister<CameraController>();
     }
 
     public enum TrackingMode

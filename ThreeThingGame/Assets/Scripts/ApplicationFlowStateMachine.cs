@@ -1,4 +1,3 @@
-using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
 using System.Collections;
@@ -10,10 +9,15 @@ using Random = System.Random;
 public class ApplicationFlowStateMachine : MonoBehaviour
 {
     public Action<string> OnPlayerTurnChange;
+    public Action<int> OnTurnsRemainingUpdated;
 
-    public GameStates m_CurrentState;
+    public GameStates m_CurrentState = GameStates.MainMenu;
+
+    [SerializeField]
+    private GameObject m_ball;
 
     private int m_currentLevel = 0;
+    private int m_turnsRemaining = 0;
 
     // Cached player names
     private string m_player1Name = string.Empty;
@@ -24,6 +28,7 @@ public class ApplicationFlowStateMachine : MonoBehaviour
     private List<int> m_playOrder;
     private int m_currentPlayer;
     private bool m_randomPlayOrder = false;
+    private Hashtable m_playerBalls = new Hashtable();
 
     public void Awake()
     {
@@ -34,8 +39,6 @@ public class ApplicationFlowStateMachine : MonoBehaviour
         }
 
         Resolver.Register<ApplicationFlowStateMachine>(this);
-
-        m_CurrentState = GameStates.MainMenu;
     }
 
     public int GetLevelNum()
@@ -76,8 +79,14 @@ public class ApplicationFlowStateMachine : MonoBehaviour
         if (m_currentPlayer >= m_playOrder.Count)
         {
             m_currentPlayer = 0;
+            m_turnsRemaining--;
+            OnTurnsRemainingUpdated.Invoke(m_turnsRemaining);
         }
-  
+
+        // Check and set balls
+        CheckBalls(m_playOrder[m_currentPlayer]);
+        SetBall(m_playOrder[m_currentPlayer]);
+
         switch (m_playOrder[m_currentPlayer])
         {
             case 1:
@@ -165,7 +174,7 @@ public class ApplicationFlowStateMachine : MonoBehaviour
         }
         m_currentPlayer = 0;
 
-        // Randomise
+        // Randomize
         if (m_randomPlayOrder)
         {
             Random rand = new Random();
@@ -173,6 +182,11 @@ public class ApplicationFlowStateMachine : MonoBehaviour
         }
 
         m_CurrentState = GameStates.GameLoop;
+
+        // Check and set balls
+        m_playerBalls = new Hashtable();
+        CheckBalls(m_playOrder[m_currentPlayer]);
+        SetBall(m_playOrder[m_currentPlayer]);
 
         switch (m_playOrder[m_currentPlayer])
         {
@@ -197,6 +211,9 @@ public class ApplicationFlowStateMachine : MonoBehaviour
                 }
                 break;
         }
+
+        m_turnsRemaining = Resolver.Resolve<LevelManager>().GetNumberOfTurns();
+        OnTurnsRemainingUpdated?.Invoke(m_turnsRemaining);
     }
 
     public void Handle_NextLevel()
@@ -207,6 +224,24 @@ public class ApplicationFlowStateMachine : MonoBehaviour
         SceneManager.LoadScene(m_currentLevel);
 
         m_CurrentState = GameStates.BeginLevel;
+    }
+
+    // Checks to ensure a player has balls
+    private void CheckBalls(int _playerNum)
+    {
+        if (!m_playerBalls.ContainsKey(_playerNum))
+        {
+            BallSpawnManager ballSpawnManager = Resolver.Resolve<BallSpawnManager>();
+            GameObject newGolfBall = Instantiate(m_ball, ballSpawnManager.GetSpawnPoint(_playerNum).transform.position, ballSpawnManager.GetSpawnPoint(_playerNum).transform.rotation);
+            m_playerBalls.Add(_playerNum, newGolfBall);
+        }
+    }
+
+    private void SetBall(int _playerNum)
+    {
+        GameObject entry = (GameObject)m_playerBalls[_playerNum];
+        Resolver.Resolve<BallHandler>().SetCurrentBall(entry.GetComponent<Golfball>());
+        Resolver.Resolve<CameraController>().Orbit.Target = entry.transform;
     }
 
     private void OnDestroy()
