@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3221410261079408484}
   - component: {fileID: 494384722720452712}
   - component: {fileID: 4915010247945059307}
+  - component: {fileID: 8981994007235127833}
   m_Layer: 0
   m_Name: door
   m_TagString: Untagged
@@ -37,7 +38,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8652900652790596083
 MeshFilter:
@@ -219,7 +220,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4ea49a1070b1f489080f5ca1d42699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DestructionTime: 10
+  DestructionTime: 4
+  OnBeforeDestroy:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8981994007235127833}
+        m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2250704661043546294, guid: fd3bb5937789e5d4182c29cec18a37b1, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4915010247945059307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,3 +249,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreToAdd: 10
+--- !u!114 &8981994007235127833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086409935357565603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ec3964d7576f740b1adbc92bcdfa58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
