@@ -16,6 +16,12 @@ public class DestroyAfterTime : MonoBehaviour
 
     private void OnDestroy()
     {
+        // HACK: This stops issues with OnDestroy spawning objects when exiting play mode
+        if (!gameObject.scene.isLoaded)
+        {
+            return;
+        }
+
         OnBeforeDestroy?.Invoke();
     }
 }
