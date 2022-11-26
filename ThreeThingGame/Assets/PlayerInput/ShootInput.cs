@@ -127,6 +127,7 @@ public class ShootInput : MonoBehaviour
                     {
                         // TODO: Notify next turn here...
                         SetPhase(ShootPhase.None);
+                        Resolver.Resolve<ApplicationFlowStateMachine>().SwitchControllToNextPlayer();
                     }
                 }
                 break;
