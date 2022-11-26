@@ -15,6 +15,7 @@ public class BallShooter : MonoBehaviour
     public float Force;
 
     public LineRenderer AimLine;
+    public CameraController CameraController;
 
     private DragPhase phase;
 
@@ -63,6 +64,7 @@ public class BallShooter : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 phase = DragPhase.Dragging;
+                //CameraController.SetStaticTrackingMode();
             }
         }
 
@@ -88,6 +90,7 @@ public class BallShooter : MonoBehaviour
                 rBody.AddForce(force, ForceMode.Impulse);
 
                 phase = DragPhase.None;
+                CameraController.SetFixedRotationTrackingMode(aimVector);
             }
         }
 
