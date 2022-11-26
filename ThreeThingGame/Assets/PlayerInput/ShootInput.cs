@@ -1,9 +1,19 @@
 ﻿using UnityEngine;
 
+public enum ShootPhase
+{
+    None,
+    SelectPosition,
+    SelectPower,
+    Rolling
+}
+
 public class ShootInput : MonoBehaviour
 {
     private BallHandler ballHandler;
     private ShootIndicator shootIndicator;
+
+    private Golfball trackedBall;
 
     private Camera camera;
     private Vector3 SelectedPoint;
@@ -15,10 +25,6 @@ public class ShootInput : MonoBehaviour
 
     [Tooltip("The scalar to muliply against the power to apply force to the rigidbody")]
     public float ShootForceModifier;
-
-    // hack
-    public LineRenderer LineRenderer;
-    public GameObject FireIndicator;
 
     private void Start()
     {
@@ -70,24 +76,23 @@ public class ShootInput : MonoBehaviour
                         return;
                     }
 
+                    // Wait for mouse down to begin input
                     if (Input.GetMouseButtonDown(0))
                     {
                         SelectedPoint = worldMouse; 
-
                         SetPhase(ShootPhase.SelectPower);
                     }
-
-                    // Sync the fire indicator position
-                    FireIndicator.transform.position = worldMouse;
                 }
                 break;
             case ShootPhase.SelectPower:
                 {
+                    // It's possible to select the sky
                     if(!TryResolveMousePoint(out Vector3 worldMouse))
                     {
                         return;
                     }
 
+                    // It's possible for there to be no ball
                     var currentBall = ballHandler.ResolveCurrentBall();
                     if(currentBall == null)
                     {
@@ -97,29 +102,32 @@ public class ShootInput : MonoBehaviour
                     float power = Mathf.Clamp(Vector3.Distance(SelectedPoint, worldMouse), 0.01f, PowerModifier);
 
                     Vector3 dir = -(worldMouse - SelectedPoint).normalized;
-                    //LineRenderer.SetPosition(0, transform.position);
-                    //LineRenderer.SetPosition(1, transform.position + dir * power);
 
                     shootIndicator.SetOrigin(currentBall.transform.position);
-                    shootIndicator.SetDirection(-dir);
+                    shootIndicator.SetDirection(dir);
                     shootIndicator.SetPower(power);
 
-                    //float power = GetPowerInput();
-
+                    // Perform fire when mouse is released
                     if (Input.GetMouseButtonUp(0))
                     {
                         Fire(dir, power);
                         SetPhase(ShootPhase.Rolling);
                     }
-
                 }
                 break;
             case ShootPhase.Rolling:
                 {
-                    // Check for stop behaviour
+                    if(trackedBall == null)
+                    {
+                        return;
+                    }
 
-                    // HACK
-                    SetPhase(ShootPhase.None);
+                    // Wait for the ball to finish moving before allowing more movement
+                    if (trackedBall.IsConsideredStationary())
+                    {
+                        // TODO: Notify next turn here...
+                        SetPhase(ShootPhase.None);
+                    }
                 }
                 break;
         }
@@ -133,6 +141,7 @@ public class ShootInput : MonoBehaviour
         if(currentBall != null)
         {
             currentBall.Fire(force);
+            trackedBall = currentBall;
         }
     }
 

@@ -12,7 +12,7 @@ public class Golfball : MonoBehaviour
 
     public bool IsConsideredStationary()
     {
-        return false;
+        return physicsBody.IsSleeping();
     }
 
     private void Start()

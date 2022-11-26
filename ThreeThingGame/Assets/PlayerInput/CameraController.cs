@@ -2,6 +2,8 @@
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] protected Camera sourceCamera;
+
     private Transform target;
 
     public TrackingMode mode;
@@ -55,8 +57,8 @@ public class CameraController : MonoBehaviour
                     Quaternion targetRot = orbitRotation;
                     Vector3 targetPos = Orbit.Target.position + (dir * -Orbit.Zoom);
 
-                    transform.position = Vector3.Lerp(transform.position, targetPos, LerpRate);
-                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, LerpRate);
+                    sourceCamera.transform.position = Vector3.Lerp(sourceCamera.transform.position, targetPos, LerpRate);
+                    sourceCamera.transform.rotation = Quaternion.Lerp(sourceCamera.transform.rotation, targetRot, LerpRate);
                 }
                 break;
             case TrackingMode.Static:
