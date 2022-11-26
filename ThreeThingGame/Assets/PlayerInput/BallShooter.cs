@@ -1,6 +1,7 @@
 using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.AnimatedValues;
 using UnityEngine;
 
 public enum DragPhase
@@ -64,6 +65,7 @@ public class BallShooter : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 phase = DragPhase.Dragging;
+                CameraController.SetTrackingTarget(transform);
                 //CameraController.SetStaticTrackingMode();
             }
         }
@@ -84,13 +86,14 @@ public class BallShooter : MonoBehaviour
             AimLine.SetPosition(0, transform.position);
             AimLine.SetPosition(1, end);
 
+            //CameraController.SetFixedRotationTrackingMode(aimVector);
+
             if (!Input.GetMouseButton(0))
             {
                 var force = aimVector;
                 rBody.AddForce(force, ForceMode.Impulse);
 
                 phase = DragPhase.None;
-                CameraController.SetFixedRotationTrackingMode(aimVector);
             }
         }
 
