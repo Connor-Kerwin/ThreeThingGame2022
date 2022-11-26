@@ -1,31 +1,68 @@
+using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum DragPhase
+{
+    None,
+    Dragging
+}
 
 public class BallShooter : MonoBehaviour
 {
     public Rigidbody rBody;
     public float Force;
 
+    private DragPhase phase;
+
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        var cam = Camera.main;
+
+        if (phase == DragPhase.None)
         {
-            var cam = Camera.main;
-            var camRay = cam.ScreenPointToRay(Input.mousePosition);
-
-            var plane = new Plane(Vector3.up, Vector3.zero);
-            if (plane.Raycast(camRay, out float enter))
+            if (Input.GetMouseButtonDown(0))
             {
-                var hitPoint = camRay.GetPoint(enter);
+                phase = DragPhase.Dragging;
+            }
+        }
 
-                // Match the Y level
-                var srcPoint = transform.position;
-                srcPoint.y = hitPoint.y;
+        if(phase == DragPhase.Dragging)
+        {
 
-                var dir = hitPoint - srcPoint;
-                Debug.DrawLine(srcPoint, hitPoint);
+        }
 
+        var camRay = cam.ScreenPointToRay(Input.mousePosition);
+
+        var plane = new Plane(Vector3.up, Vector3.zero);
+        if (plane.Raycast(camRay, out float enter))
+        {
+            var hitPoint = camRay.GetPoint(enter);
+
+            // Match the Y level
+            var srcPoint = transform.position;
+            srcPoint.y = hitPoint.y;
+
+            var dir = (hitPoint - srcPoint).normalized;
+            Debug.DrawLine(srcPoint, hitPoint);
+
+            switch (phase)
+            {
+                case DragPhase.None:
+                    {
+
+                    }
+                    break;
+                case DragPhase.Dragging:
+                    {
+
+                    }
+                    break;
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
                 rBody.AddForce(dir * Force, ForceMode.Impulse);
             }
         }
