@@ -2,18 +2,19 @@
 
 public class ShootInput : MonoBehaviour
 {
+    private BallHandler ballHandler;
+    private ShootIndicator shootIndicator;
+
     private Camera camera;
+    private Vector3 SelectedPoint;
 
     public ShootPhase phase;
-    public Vector2 clickOrigin;
-    public Vector2 inputDelta;
 
-    private Vector3 SelectedPoint;
-    private float SelectedPower;
-
+    [Tooltip("The scalar to multiply against the normalized power value between 0 and 1")]
     public float PowerModifier;
+
+    [Tooltip("The scalar to muliply against the power to apply force to the rigidbody")]
     public float ShootForceModifier;
-    public Rigidbody Rigidbody;
 
     // hack
     public LineRenderer LineRenderer;
@@ -21,6 +22,9 @@ public class ShootInput : MonoBehaviour
 
     private void Start()
     {
+        ballHandler = Resolver.Resolve<BallHandler>();
+        shootIndicator = Resolver.Resolve<ShootIndicator>();
+
         // TODO: Correctly resolve camera...
         camera = Camera.main;
 
@@ -49,16 +53,6 @@ public class ShootInput : MonoBehaviour
         return false;
     }
 
-    private float GetPowerInput()
-    {
-        Vector3 mousePosition = Input.mousePosition;
-        float height = Screen.height;
-
-        float norm = (mousePosition.y / height) + 0.5f;
-
-        return norm;
-    }
-
     private void Update()
     {
         switch (phase)
@@ -83,12 +77,7 @@ public class ShootInput : MonoBehaviour
                         SetPhase(ShootPhase.SelectPower);
                     }
 
-                    Vector3 src = transform.position;
-                    src.y = 0.0f;
-
-                    //LineRenderer.SetPosition(0, src);
-                    //LineRenderer.SetPosition(1, worldMouse);
-
+                    // Sync the fire indicator position
                     FireIndicator.transform.position = worldMouse;
                 }
                 break;
@@ -99,18 +88,26 @@ public class ShootInput : MonoBehaviour
                         return;
                     }
 
+                    var currentBall = ballHandler.ResolveCurrentBall();
+                    if(currentBall == null)
+                    {
+                        return;
+                    }
+
                     float power = Mathf.Clamp(Vector3.Distance(SelectedPoint, worldMouse), 0.01f, PowerModifier);
 
                     Vector3 dir = -(worldMouse - SelectedPoint).normalized;
-                    LineRenderer.SetPosition(0, transform.position);
-                    LineRenderer.SetPosition(1, transform.position + dir * power);
+                    //LineRenderer.SetPosition(0, transform.position);
+                    //LineRenderer.SetPosition(1, transform.position + dir * power);
+
+                    shootIndicator.SetOrigin(currentBall.transform.position);
+                    shootIndicator.SetDirection(-dir);
+                    shootIndicator.SetPower(power);
 
                     //float power = GetPowerInput();
 
                     if (Input.GetMouseButtonUp(0))
                     {
-                        SelectedPower = power;
-
                         Fire(dir, power);
                         SetPhase(ShootPhase.Rolling);
                     }
@@ -128,58 +125,15 @@ public class ShootInput : MonoBehaviour
         }
     }
 
-    private Vector2 GetRelativeMousePosition()
-    {
-        float w = Screen.width;
-        float h = Screen.height;
-
-        Vector3 mouse = Input.mousePosition;
-
-        return new Vector2(mouse.x / w, mouse.y / h);
-    }
-
     private void Fire(Vector3 direction, float power)
     {
-        Vector3 dir = direction * power * ShootForceModifier;
-        Rigidbody.AddForce(dir, ForceMode.Impulse);
+        Vector3 force = direction * power * ShootForceModifier;
 
-        //var cam = Camera.main;
-        //var fwd = cam.transform.forward;
-        //fwd.y = 0.0f;
-
-        //var right = cam.transform.right;
-        //right.y = 0.0f;
-
-        //var dir = inputDelta; //.normalized;
-
-
-        //Vector2 src = new Vector2(0.5f, 0.5f);
-        //Vector2 cur = GetRelativeMousePosition();
-
-        //Vector2 screenDirection = cur - src;
-
-        //float ang = Vector2.Angle(Vector2.up, screenDirection);
-        //Debug.Log(ang);
-
-        //Vector3 start = transform.position;
-        //Vector3 end = start + (fwd * screenDirection.y) + (right * screenDirection.x);
-
-        //Vector3 worldDirection = (end - start).normalized;
-
-
-        ////Vector3 angle = new Vector3(inputDelta.x, 0.0f, inputDelta.y);
-        ////Quaternion rotation = Quaternion.Euler(angle);
-
-        ////Vector3 dir = rotation * Vector3.up;
-
-        //Debug.DrawLine(start, end);
-
-        //// hack
-        //if (!Input.GetMouseButton(1))
-        //{
-        //   // SetPhase(BallPhase.None);
-        //}
-
+        var currentBall = ballHandler.ResolveCurrentBall();
+        if(currentBall != null)
+        {
+            currentBall.Fire(force);
+        }
     }
 
     private void SetPhase(ShootPhase phase)
@@ -189,27 +143,15 @@ public class ShootInput : MonoBehaviour
         switch (phase)
         {
             case ShootPhase.None:
-                {
-                    FireIndicator.SetActive(false);
-                    LineRenderer.enabled = false;
-                }
-                break;
             case ShootPhase.SelectPosition:
+            case ShootPhase.Rolling:
                 {
-                    FireIndicator.SetActive(true);
-                    LineRenderer.enabled = false;
+                    shootIndicator.Toggle(false);
                 }
                 break;
             case ShootPhase.SelectPower:
                 {
-                    FireIndicator.SetActive(false);
-                    LineRenderer.enabled = true;
-                }
-                break;
-            case ShootPhase.Rolling:
-                {
-                    FireIndicator.SetActive(false);
-                    LineRenderer.enabled = false;
+                    shootIndicator.Toggle(true);
                 }
                 break;
         }
