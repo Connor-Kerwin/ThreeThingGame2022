@@ -65,8 +65,6 @@ public class BallShooter : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 phase = DragPhase.Dragging;
-                CameraController.SetTrackingTarget(transform);
-                //CameraController.SetStaticTrackingMode();
             }
         }
 
