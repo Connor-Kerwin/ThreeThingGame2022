@@ -95,6 +95,10 @@ GameObject:
   - component: {fileID: 8603725266189288046}
   - component: {fileID: 4668342885337992651}
   - component: {fileID: 7434807841272887553}
+  - component: {fileID: 5065442634676988085}
+  - component: {fileID: 4881913968518097748}
+  - component: {fileID: 7900832532729589432}
+  - component: {fileID: 2477521117874066301}
   m_Layer: 0
   m_Name: cabinWindow
   m_TagString: Untagged
@@ -168,3 +172,55 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5065442634676988085
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8947880770311313620}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000004, y: 0.24, z: 0.14040005}
+  m_Center: {x: 0, y: 0.12, z: 0}
+--- !u!65 &4881913968518097748
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8947880770311313620}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000004, y: 0.24, z: 0.14040005}
+  m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!65 &7900832532729589432
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8947880770311313620}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.28, y: 0.49, z: 0.14040005}
+  m_Center: {x: -0.36, y: 0.485, z: 0}
+--- !u!65 &2477521117874066301
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8947880770311313620}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.28, y: 0.49, z: 0.14040005}
+  m_Center: {x: 0.36, y: 0.485, z: 0}
