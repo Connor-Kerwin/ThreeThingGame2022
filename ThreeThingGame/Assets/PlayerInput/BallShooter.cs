@@ -1,132 +1,158 @@
-using Mono.Cecil.Cil;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+//using Mono.Cecil.Cil;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEditor.AnimatedValues;
+//using UnityEngine;
 
-public enum DragPhase
-{
-    None,
-    Dragging
-}
+//public enum ShootPhase
+//{
+//    None,
+//    SelectPosition,
+//    SelectPower,
+//    Rolling
+//}
 
-public class BallShooter : MonoBehaviour
-{
-    public Rigidbody rBody;
-    public float Force;
+//public class BallShooter : MonoBehaviour
+//{
+//    public Rigidbody rBody;
+//    public float Force;
+//    public float BoxEnableForce;
 
-    public LineRenderer AimLine;
-    public CameraController CameraController;
+//    public GameObject SphereCollider;
+//    public GameObject BoxCollider;
 
-    private DragPhase phase;
+//    public LineRenderer AimLine;
+//    public CameraController CameraController;
 
-    private bool TryResolveMousePoint(out Vector3 point)
-    {
-        var cam = Camera.main;
-        var camRay = cam.ScreenPointToRay(Input.mousePosition);
+//    private ShootPhase phase;
 
-        var plane = new Plane(Vector3.up, Vector3.zero);
-        if (plane.Raycast(camRay, out float enter))
-        {
-            var hitPoint = camRay.GetPoint(enter);
+//    private bool TryResolveMousePoint(out Vector3 point)
+//    {
+//        var cam = Camera.main;
+//        var camRay = cam.ScreenPointToRay(Input.mousePosition);
 
-            // Match the Y level
-            var srcPoint = transform.position;
-            srcPoint.y = hitPoint.y;
+//        var plane = new Plane(Vector3.up, Vector3.zero);
+//        if (plane.Raycast(camRay, out float enter))
+//        {
+//            var hitPoint = camRay.GetPoint(enter);
 
-            point = hitPoint;
-            return true;
-        }
+//            // Match the Y level
+//            var srcPoint = transform.position;
+//            srcPoint.y = hitPoint.y;
 
-        point = default;
-        return false;
-    }
+//            point = hitPoint;
+//            return true;
+//        }
 
-    private Vector3 ResolveAimVector(Vector3 source, Vector3 point)
-    {
-        var dir = point - source;
-        var aimDir = -dir;
+//        point = default;
+//        return false;
+//    }
 
-        var mod = 1.0f;
-        return aimDir * mod;
-    }
+//    private Vector3 ResolveAimVector(Vector3 source, Vector3 point)
+//    {
+//        var dir = point - source;
+//        var aimDir = -dir;
 
-    private Vector3 ResolveAimLineEndpoint(Vector3 aimVector)
-    {
-        return transform.position + aimVector;
-    }
+//        var mod = 1.0f;
+//        return aimDir * mod;
+//    }
 
-    private void Update()
-    {
-        if (phase == DragPhase.None)
-        {
-            AimLine.gameObject.SetActive(false);
+//    private Vector3 ResolveAimLineEndpoint(Vector3 aimVector)
+//    {
+//        return transform.position + aimVector;
+//    }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                phase = DragPhase.Dragging;
-                //CameraController.SetStaticTrackingMode();
-            }
-        }
+//    private void Update()
+//    {
+//        if (phase == ShootPhase.None)
+//        {
+//            AimLine.gameObject.SetActive(false);
 
-        if (phase == DragPhase.Dragging)
-        {
-            AimLine.gameObject.SetActive(true);
+//            if (Input.GetMouseButtonDown(0))
+//            {
+//                phase = ShootPhase.SelectPosition;
+//            }
+//        }
 
-            if (!TryResolveMousePoint(out Vector3 hitPoint))
-            {
-                Debug.Log("didnt resolve");
-                return;
-            }
+//        if (phase == ShootPhase.SelectPosition)
+//        {
+//            AimLine.gameObject.SetActive(true);
 
-            var aimVector = ResolveAimVector(transform.position, hitPoint);
-            var end = ResolveAimLineEndpoint(aimVector);
+//            if (!TryResolveMousePoint(out Vector3 hitPoint))
+//            {
+//                Debug.Log("didnt resolve");
+//                return;
+//            }
 
-            AimLine.SetPosition(0, transform.position);
-            AimLine.SetPosition(1, end);
+//            var aimVector = ResolveAimVector(transform.position, hitPoint);
+//            var end = ResolveAimLineEndpoint(aimVector);
 
-            if (!Input.GetMouseButton(0))
-            {
-                var force = aimVector;
-                rBody.AddForce(force, ForceMode.Impulse);
+//            AimLine.SetPosition(0, transform.position);
+//            AimLine.SetPosition(1, end);
 
-                phase = DragPhase.None;
-                CameraController.SetFixedRotationTrackingMode(aimVector);
-            }
-        }
+//            //CameraController.SetFixedRotationTrackingMode(aimVector);
 
-        //var cam = Camera.main;
-        //var camRay = cam.ScreenPointToRay(Input.mousePosition);
+//            if (!Input.GetMouseButton(0))
+//            {
+//                var force = aimVector;
+//                rBody.AddForce(force, ForceMode.Impulse);
 
-        //var plane = new Plane(Vector3.up, Vector3.zero);
-        //if (plane.Raycast(camRay, out float enter))
-        //{
-        //    var hitPoint = camRay.GetPoint(enter);
+//                BoxCollider.SetActive(false);
+//                SphereCollider.SetActive(true);
+//                phase = ShootPhase.Rolling;
+//            }
+//        }
 
-        //    // Match the Y level
-        //    var srcPoint = transform.position;
-        //    srcPoint.y = hitPoint.y;
+//        else if(phase == ShootPhase.Rolling)
+//        {
+//            var velocity = rBody.velocity;
+//            Debug.Log(rBody.velocity);
 
-        //    var dir = (hitPoint - srcPoint).normalized;
-        //    Debug.DrawLine(srcPoint, hitPoint);
+//            if(velocity.magnitude < BoxEnableForce)
+//            {
+//                BoxCollider.SetActive(true);
+//                SphereCollider.SetActive(false);
+//            }
 
-        //    switch (phase)
-        //    {
-        //        case DragPhase.None:
-        //            {
+//            if(velocity.magnitude <= 0.001f)
+//            {
+//                phase = ShootPhase.None;
+//            }
+//        }
 
-        //            }
-        //            break;
-        //        case DragPhase.Dragging:
-        //            {
+//        //var cam = Camera.main;
+//        //var camRay = cam.ScreenPointToRay(Input.mousePosition);
 
-        //            }
-        //            break;
-        //    }
+//        //var plane = new Plane(Vector3.up, Vector3.zero);
+//        //if (plane.Raycast(camRay, out float enter))
+//        //{
+//        //    var hitPoint = camRay.GetPoint(enter);
 
-        //    if (Input.GetMouseButtonDown(0))
-        //    {
-        //        rBody.AddForce(dir * Force, ForceMode.Impulse);
-        //    }
-        //}
-    }
-}
+//        //    // Match the Y level
+//        //    var srcPoint = transform.position;
+//        //    srcPoint.y = hitPoint.y;
+
+//        //    var dir = (hitPoint - srcPoint).normalized;
+//        //    Debug.DrawLine(srcPoint, hitPoint);
+
+//        //    switch (phase)
+//        //    {
+//        //        case DragPhase.None:
+//        //            {
+
+//        //            }
+//        //            break;
+//        //        case DragPhase.Dragging:
+//        //            {
+
+//        //            }
+//        //            break;
+//        //    }
+
+//        //    if (Input.GetMouseButtonDown(0))
+//        //    {
+//        //        rBody.AddForce(dir * Force, ForceMode.Impulse);
+//        //    }
+//        //}
+//    }
+//}
