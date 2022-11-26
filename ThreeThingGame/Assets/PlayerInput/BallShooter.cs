@@ -4,21 +4,27 @@ using System.Collections.Generic;
 using UnityEditor.AnimatedValues;
 using UnityEngine;
 
-public enum DragPhase
+public enum ShootPhase
 {
     None,
-    Dragging
+    SelectPosition,
+    SelectPower,
+    Rolling
 }
 
 public class BallShooter : MonoBehaviour
 {
     public Rigidbody rBody;
     public float Force;
+    public float BoxEnableForce;
+
+    public GameObject SphereCollider;
+    public GameObject BoxCollider;
 
     public LineRenderer AimLine;
     public CameraController CameraController;
 
-    private DragPhase phase;
+    private ShootPhase phase;
 
     private bool TryResolveMousePoint(out Vector3 point)
     {
@@ -58,17 +64,17 @@ public class BallShooter : MonoBehaviour
 
     private void Update()
     {
-        if (phase == DragPhase.None)
+        if (phase == ShootPhase.None)
         {
             AimLine.gameObject.SetActive(false);
 
             if (Input.GetMouseButtonDown(0))
             {
-                phase = DragPhase.Dragging;
+                phase = ShootPhase.SelectPosition;
             }
         }
 
-        if (phase == DragPhase.Dragging)
+        if (phase == ShootPhase.SelectPosition)
         {
             AimLine.gameObject.SetActive(true);
 
@@ -91,7 +97,26 @@ public class BallShooter : MonoBehaviour
                 var force = aimVector;
                 rBody.AddForce(force, ForceMode.Impulse);
 
-                phase = DragPhase.None;
+                BoxCollider.SetActive(false);
+                SphereCollider.SetActive(true);
+                phase = ShootPhase.Rolling;
+            }
+        }
+
+        else if(phase == ShootPhase.Rolling)
+        {
+            var velocity = rBody.velocity;
+            Debug.Log(rBody.velocity);
+
+            if(velocity.magnitude < BoxEnableForce)
+            {
+                BoxCollider.SetActive(true);
+                SphereCollider.SetActive(false);
+            }
+
+            if(velocity.magnitude <= 0.001f)
+            {
+                phase = ShootPhase.None;
             }
         }
 
