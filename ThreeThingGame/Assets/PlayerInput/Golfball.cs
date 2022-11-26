@@ -21,7 +21,7 @@ public class Golfball : MonoBehaviour
         ballHandler.AddBall(this);
 
         // HACK: DONT DO THIS
-        ballHandler.SetCurrentBall(this);
+        //ballHandler.SetCurrentBall(this);
     }
 
     private void OnDestroy()

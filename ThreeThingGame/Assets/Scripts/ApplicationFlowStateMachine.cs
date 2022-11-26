@@ -13,6 +13,9 @@ public class ApplicationFlowStateMachine : MonoBehaviour
 
     public GameStates m_CurrentState;
 
+    [SerializeField]
+    private GameObject m_ball;
+
     private int m_currentLevel = 0;
 
     // Cached player names
