@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 259838950821199002}
   - component: {fileID: 937375258}
   - component: {fileID: 937375259}
-  m_Layer: 0
+  - component: {fileID: 4043707171027397115}
+  m_Layer: 7
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +38,7 @@ Transform:
   - {fileID: 2008789734254481868}
   - {fileID: 293186266588718263}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &259838950821199007
 MeshFilter:
@@ -136,6 +137,21 @@ MonoBehaviour:
   physicsBody: {fileID: 259838950821199002}
   boxCollider: {fileID: 6078094613216082524}
   sphereCollider: {fileID: 613503628485556877}
+--- !u!114 &4043707171027397115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259838950821199003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b578b72426a404ab34849222ef10a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsBody: {fileID: 259838950821199002}
+  MagnitudeThreshold: 0.25
+  DamageOnHit: 100
 --- !u!1 &613503628485556877
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +164,7 @@ GameObject:
   - component: {fileID: 2034127849108465468}
   - component: {fileID: 4731810388253325237}
   - component: {fileID: 5434921496677027496}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SphereCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +261,7 @@ GameObject:
   - component: {fileID: 6462880214030321399}
   - component: {fileID: 2482088714702922051}
   - component: {fileID: 4487684801428487524}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BoxCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,9 +410,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1751480086967751553, guid: a8ba74d84d902ab44bfdbae00aee638e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a8ba74d84d902ab44bfdbae00aee638e, type: 3}
       propertyPath: m_Name
       value: present
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a8ba74d84d902ab44bfdbae00aee638e, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
