@@ -46,6 +46,28 @@ public class ApplicationFlowStateMachine : MonoBehaviour
         return m_currentLevel;
     }
 
+    public List<string> GetPlayerNames()
+    {
+        List<string> names = new List<string>();
+        if (m_player1Name != string.Empty)
+        {
+            names.Add(m_player1Name);
+        }
+        if (m_player2Name != string.Empty)
+        {
+            names.Add(m_player2Name);
+        }
+        if (m_player3Name != string.Empty)
+        {
+            names.Add(m_player3Name);
+        }
+        if (m_player4Name != string.Empty)
+        {
+            names.Add(m_player4Name);
+        }
+        return names;
+    }
+
     public void SetPlayerName(string _playerName, int _playerNum)
     {
         switch (_playerNum)
@@ -141,6 +163,24 @@ public class ApplicationFlowStateMachine : MonoBehaviour
 
     public void Handle_PlayClicked(bool _randomPlayOrder)
     {
+        Resolver.Resolve<ScoreManager>().ResetScores();
+        if (m_player1Name != string.Empty)
+        {
+            Resolver.Resolve<ScoreManager>().AddPlayerToScoreList(m_player1Name);
+        }
+        if (m_player2Name != string.Empty)
+        {
+            Resolver.Resolve<ScoreManager>().AddPlayerToScoreList(m_player2Name);
+        }
+        if (m_player3Name != string.Empty)
+        {
+            Resolver.Resolve<ScoreManager>().AddPlayerToScoreList(m_player3Name);
+        }
+        if (m_player4Name != string.Empty)
+        {
+            Resolver.Resolve<ScoreManager>().AddPlayerToScoreList(m_player4Name);
+        }
+
         m_randomPlayOrder = _randomPlayOrder;
 
         Resolver.Resolve<PlayerSelectionUIController>().HideUI();
