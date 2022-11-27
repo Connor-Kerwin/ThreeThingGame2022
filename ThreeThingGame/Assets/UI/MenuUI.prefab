@@ -351,7 +351,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Three Thing Games
+  m_text: Present Dash
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 83e13a44802126245b051d82f1430c35, type: 2}
   m_sharedMaterial: {fileID: 7336519474892779040, guid: 83e13a44802126245b051d82f1430c35, type: 2}
@@ -891,7 +891,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5c9aded511c913f409c65355c869b50d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da40fe034d9ef2145a46660ac4470643, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -900,7 +900,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 2
 --- !u!1 &3424648140549691196
 GameObject:
   m_ObjectHideFlags: 0
