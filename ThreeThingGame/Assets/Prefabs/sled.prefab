@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 6196523374215515177}
   - component: {fileID: 3517177409776555902}
   m_Layer: 0
-  m_Name: Sled
+  m_Name: sled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,7 +38,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -115.813, z: 0}
 --- !u!33 &937827299636863717
 MeshFilter:
@@ -47,7 +47,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3596088895067633658}
-  m_Mesh: {fileID: 1657594569211507994, guid: d92515e215affe04c838252b6f44ab5e, type: 3}
+  m_Mesh: {fileID: -2808446636429694140, guid: 8c564d202e11f3949a6d343cd506cfdb, type: 3}
 --- !u!23 &3091478960204420655
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -68,10 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7555185752953191562, guid: d92515e215affe04c838252b6f44ab5e, type: 3}
-  - {fileID: 5688726236892997549, guid: d92515e215affe04c838252b6f44ab5e, type: 3}
-  - {fileID: -941316091555192780, guid: d92515e215affe04c838252b6f44ab5e, type: 3}
-  - {fileID: -3963241562183589234, guid: d92515e215affe04c838252b6f44ab5e, type: 3}
+  - {fileID: -8067726398312463513, guid: 242d8988d6852d04ead6fc216ebf91c0, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,8 +132,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.41465414, y: 0.27956498, z: 0.17414705}
-  m_Center: {x: 0.0000009536743, y: 0.13978249, z: 0}
+  m_Size: {x: 0.63000023, y: 0.19013399, z: 0.26000005}
+  m_Center: {x: 0, y: 0.095066994, z: 0}
 --- !u!114 &2593059977536727043
 MonoBehaviour:
   m_ObjectHideFlags: 0
