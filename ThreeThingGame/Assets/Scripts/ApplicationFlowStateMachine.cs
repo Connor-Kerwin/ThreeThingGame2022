@@ -126,6 +126,10 @@ public class ApplicationFlowStateMachine : MonoBehaviour
         CheckBalls(m_playOrder[m_currentPlayer]);
         SetBall(m_playOrder[m_currentPlayer]);
 
+        // Begin shooting
+        var shoot = Resolver.Resolve<ShootInput>();
+        shoot.BeginShooting();
+
         switch (m_playOrder[m_currentPlayer])
         {
             case 1:
@@ -244,6 +248,11 @@ public class ApplicationFlowStateMachine : MonoBehaviour
         m_playerBalls = new Hashtable();
         CheckBalls(m_playOrder[m_currentPlayer]);
         SetBall(m_playOrder[m_currentPlayer]);
+
+        // Begin shooting
+        var shoot = Resolver.Resolve<ShootInput>();
+        shoot.BeginShooting();
+
 
         switch (m_playOrder[m_currentPlayer])
         {
