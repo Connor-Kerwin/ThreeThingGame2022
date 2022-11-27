@@ -16,6 +16,8 @@ public class HudUIController : UIController
     private TMP_Text m_playersTurnLabel;
     [SerializeField]
     private TMP_Text m_turnsRemainingLabel;
+    [SerializeField]
+    private TMP_Text m_nextLevelLable;
 
     [SerializeField]
     private List<TMP_Text> m_playerScoreLabels;
@@ -78,6 +80,11 @@ public class HudUIController : UIController
             for (i = i; i < 4; i++)
             {
                 m_playerScoreLabels[i].gameObject.SetActive(false);
+            }
+
+            if (Resolver.Resolve<GameManager>().IsOnLastLevel())
+            {
+                m_nextLevelLable.text = "End Game";
             }
         }
     }

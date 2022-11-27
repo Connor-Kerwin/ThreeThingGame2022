@@ -120,6 +120,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool IsOnLastLevel()
+    {
+        if ((m_currentLevel - 1) == m_maxLevels)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void SwitchControllToNextPlayer()
     {
         m_currentPlayer++;
