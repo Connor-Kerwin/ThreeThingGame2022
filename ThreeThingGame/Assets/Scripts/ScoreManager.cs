@@ -9,6 +9,12 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Resolver.Resolve<ScoreManager>())
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
         Resolver.Register<ScoreManager>(this);
     }
 
