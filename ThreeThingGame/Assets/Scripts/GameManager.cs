@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = System.Random;
 
-public class ApplicationFlowStateMachine : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public Action<string> OnPlayerTurnChange;
     public Action<int> OnTurnsRemainingUpdated;
@@ -32,13 +32,13 @@ public class ApplicationFlowStateMachine : MonoBehaviour
 
     public void Awake()
     {
-        if (Resolver.Resolve<ApplicationFlowStateMachine>())
+        if (Resolver.Resolve<GameManager>())
         {
             Destroy(this.gameObject);
             return;
         }
 
-        Resolver.Register<ApplicationFlowStateMachine>(this);
+        Resolver.Register<GameManager>(this);
     }
 
     public int GetLevelNum()
@@ -312,7 +312,7 @@ public class ApplicationFlowStateMachine : MonoBehaviour
 
     private void OnDestroy()
     {
-        Resolver.Unregister<ApplicationFlowStateMachine>();
+        Resolver.Unregister<GameManager>();
     }
 
     public enum GameStates

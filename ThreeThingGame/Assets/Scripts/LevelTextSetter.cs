@@ -11,7 +11,7 @@ public class LevelTextSetter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int level = Resolver.Resolve<ApplicationFlowStateMachine>().GetLevelNum();
+        int level = Resolver.Resolve<GameManager>().GetLevelNum();
         m_levelTitle.text = "Level: " + level.ToString();
     }
 }

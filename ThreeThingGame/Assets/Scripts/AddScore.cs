@@ -5,7 +5,7 @@ using UnityEngine;
 public class AddScore : MonoBehaviour
 {
     private PointDisplay pointDisplay;
-    private ApplicationFlowStateMachine flowManager;
+    private GameManager flowManager;
     private ScoreManager scoreManager;
 
     public int ScoreToAdd;
@@ -13,7 +13,7 @@ public class AddScore : MonoBehaviour
     private void Start()
     {
         pointDisplay = Resolver.Resolve<PointDisplay>();
-        flowManager = Resolver.Resolve<ApplicationFlowStateMachine>();
+        flowManager = Resolver.Resolve<GameManager>();
         scoreManager = Resolver.Resolve<ScoreManager>();
     }
 
