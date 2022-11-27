@@ -26,6 +26,16 @@ public class ShootInput : MonoBehaviour
     [Tooltip("The scalar to muliply against the power to apply force to the rigidbody")]
     public float ShootForceModifier;
 
+    private void Awake()
+    {
+        Resolver.Register<ShootInput>(this);
+    }
+
+    private void OnDestroy()
+    {
+        Resolver.Unregister<ShootInput>();
+    }
+
     private void Start()
     {
         ballHandler = Resolver.Resolve<BallHandler>();
@@ -59,16 +69,21 @@ public class ShootInput : MonoBehaviour
         return false;
     }
 
+    public void BeginShooting()
+    {
+        SetPhase(ShootPhase.SelectPosition);
+    }
+
     private void Update()
     {
         switch (phase)
         {
-            case ShootPhase.None:
-                {
-                    // TODO: DOn't do this
-                    SetPhase(ShootPhase.SelectPosition);
-                }
-                break;
+            //case ShootPhase.None:
+            //    {
+            //        // TODO: DOn't do this
+            //        SetPhase(ShootPhase.SelectPosition);
+            //    }
+            //    break;
             case ShootPhase.SelectPosition:
                 {
                     if (!TryResolveMousePoint(out Vector3 worldMouse))

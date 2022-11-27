@@ -46,6 +46,23 @@ public class ApplicationFlowStateMachine : MonoBehaviour
         return m_currentLevel;
     }
 
+    public string GetCurrentPlayerName()
+    {
+        switch (m_currentPlayer)
+        {
+            case 0:
+                return m_player1Name;
+            case 1:
+                return m_player2Name;
+            case 2:
+                return m_player3Name;
+            case 3:
+                return m_player4Name;
+            default:
+                return null;
+        }
+    }
+
     public List<string> GetPlayerNames()
     {
         List<string> names = new List<string>();
@@ -108,6 +125,10 @@ public class ApplicationFlowStateMachine : MonoBehaviour
         // Check and set balls
         CheckBalls(m_playOrder[m_currentPlayer]);
         SetBall(m_playOrder[m_currentPlayer]);
+
+        // Begin shooting
+        var shoot = Resolver.Resolve<ShootInput>();
+        shoot.BeginShooting();
 
         switch (m_playOrder[m_currentPlayer])
         {
@@ -227,6 +248,11 @@ public class ApplicationFlowStateMachine : MonoBehaviour
         m_playerBalls = new Hashtable();
         CheckBalls(m_playOrder[m_currentPlayer]);
         SetBall(m_playOrder[m_currentPlayer]);
+
+        // Begin shooting
+        var shoot = Resolver.Resolve<ShootInput>();
+        shoot.BeginShooting();
+
 
         switch (m_playOrder[m_currentPlayer])
         {
