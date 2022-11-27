@@ -657,7 +657,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 150}
+  m_SizeDelta: {x: 340, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1502061240980862251
 CanvasRenderer:
@@ -714,12 +714,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 53
+  m_fontSize: 30
   m_fontSizeBase: 29.93
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 53
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -826,7 +826,7 @@ Transform:
   m_Children:
   - {fileID: 1502061242787037339}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1502061241979555758
 MonoBehaviour:
@@ -846,6 +846,7 @@ MonoBehaviour:
   m_postGameUIRoot: {fileID: 1502061242704677735}
   m_playersTurnLabel: {fileID: 1502061240980862252}
   m_turnsRemainingLabel: {fileID: 5493943711289425468}
+  m_nextLevelLable: {fileID: 3911615937064944633}
   m_playerScoreLabels:
   - {fileID: 6336975805092300206}
   - {fileID: 5637031919480913012}
@@ -888,8 +889,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 420}
-  m_SizeDelta: {x: 650, y: 150}
+  m_AnchoredPosition: {x: 0, y: 472}
+  m_SizeDelta: {x: 350, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1502061242166875215
 CanvasRenderer:
@@ -2032,7 +2033,6 @@ GameObject:
   - component: {fileID: 2912166482792959355}
   - component: {fileID: 1338628087568411609}
   - component: {fileID: 4993663430561190953}
-  - component: {fileID: 3959564278451763551}
   m_Layer: 5
   m_Name: TurnsRemaining
   m_TagString: Untagged
@@ -2099,19 +2099,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3959564278451763551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582729132518962826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9a1ece2578a28c4aa3e4b1924d7c66e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_levelTitle: {fileID: 5493943711289425468}
 --- !u!1 &7336589358304167460
 GameObject:
   m_ObjectHideFlags: 0
