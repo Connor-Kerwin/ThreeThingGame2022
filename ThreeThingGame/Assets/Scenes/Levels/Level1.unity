@@ -4804,7 +4804,6 @@ GameObject:
   - component: {fileID: 1589814997}
   - component: {fileID: 1589815000}
   - component: {fileID: 1589814999}
-  - component: {fileID: 1589814998}
   m_Layer: 8
   m_Name: Lightmap Roof (5)
   m_TagString: Untagged
@@ -4827,19 +4826,6 @@ Transform:
   m_Father: {fileID: 108799324}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
---- !u!65 &1589814998
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589814996}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: -0.0000038146973}
 --- !u!23 &1589814999
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5195,7 +5181,6 @@ GameObject:
   - component: {fileID: 1700090500}
   - component: {fileID: 1700090503}
   - component: {fileID: 1700090502}
-  - component: {fileID: 1700090501}
   m_Layer: 8
   m_Name: Lightmap Roof
   m_TagString: Untagged
@@ -5218,19 +5203,6 @@ Transform:
   m_Father: {fileID: 108799324}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1700090501
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700090499}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: -0.0000038146973}
 --- !u!23 &1700090502
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6131,7 +6103,6 @@ GameObject:
   - component: {fileID: 2045792843}
   - component: {fileID: 2045792846}
   - component: {fileID: 2045792845}
-  - component: {fileID: 2045792844}
   m_Layer: 8
   m_Name: Lightmap Roof (1)
   m_TagString: Untagged
@@ -6154,19 +6125,6 @@ Transform:
   m_Father: {fileID: 108799324}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2045792844
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2045792842}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: -0.0000038146973}
 --- !u!23 &2045792845
 MeshRenderer:
   m_ObjectHideFlags: 0
