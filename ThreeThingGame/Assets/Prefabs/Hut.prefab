@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &969357992762492987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2644548869584710492}
+  - component: {fileID: 7633084051684601366}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2644548869584710492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969357992762492987}
+  m_LocalRotation: {x: -0.00000003685796, y: -0.00000005960465, z: -0.46840933, w: 0.8835116}
+  m_LocalPosition: {x: 0.3, y: 0.467, z: -0}
+  m_LocalScale: {x: 1.1287, y: 0.03, z: 1.2807}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6804265365654526850}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -55.862}
+--- !u!65 &7633084051684601366
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969357992762492987}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2849063683319605908
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,8 +77,53 @@ Transform:
   - {fileID: 6804265365654526850}
   - {fileID: 5649217517949357114}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6142553863308876896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8055456907885103667}
+  - component: {fileID: 7605093265555845317}
+  m_Layer: 0
+  m_Name: Collider (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8055456907885103667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6142553863308876896}
+  m_LocalRotation: {x: -0.46840793, y: 0.8835123, z: -0, w: 0}
+  m_LocalPosition: {x: -0.312, y: 0.463, z: 0}
+  m_LocalScale: {x: 1.1287, y: 0.03, z: 1.2807}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6804265365654526850}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: -55.862}
+--- !u!65 &7605093265555845317
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6142553863308876896}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2849063683960709406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -223,7 +313,13 @@ PrefabInstance:
       value: cabinRoofCenter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 97043667ec0973a4ea3d1c15be5d11ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2644548869584710492}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 97043667ec0973a4ea3d1c15be5d11ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8055456907885103667}
   m_SourcePrefab: {fileID: 100100000, guid: 97043667ec0973a4ea3d1c15be5d11ad, type: 3}
 --- !u!4 &6804265365654526850 stripped
 Transform:
