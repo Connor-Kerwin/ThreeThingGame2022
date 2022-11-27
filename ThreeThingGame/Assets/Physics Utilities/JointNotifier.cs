@@ -14,6 +14,10 @@ public class JointNotifier : MonoBehaviour
     // Helper function that notifys the game manager and adds a turn
     public void Handle_ReindeerDestruction()
     {
+        // Hack, define a value in editor
+
+        Resolver.Resolve<GameManager>().AddTurn();
+        Resolver.Resolve<GameManager>().AddTurn();
         Resolver.Resolve<GameManager>().AddTurn();
     }
 }
