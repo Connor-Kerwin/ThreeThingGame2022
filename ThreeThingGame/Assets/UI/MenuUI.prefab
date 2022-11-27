@@ -122,9 +122,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ApplicationFlowStateMachine, Assembly-CSharp
-        m_MethodName: Handle_StartGameClicked
+      - m_Target: {fileID: 3424648139555526723}
+        m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
+        m_MethodName: Handle_PlayGameClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -165,7 +165,7 @@ Transform:
   m_Children:
   - {fileID: 3424648139989419594}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3424648139555526723
 MonoBehaviour:
@@ -486,9 +486,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Options
-
-'
+  m_text: How To Play
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -570,7 +568,7 @@ GameObject:
   - component: {fileID: 3424648140428509933}
   - component: {fileID: 3424648140428509930}
   m_Layer: 5
-  m_Name: OptionsButton
+  m_Name: HowToPlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -679,9 +677,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ApplicationFlowStateMachine, Assembly-CSharp
-        m_MethodName: Handle_OptionsClicked
+      - m_Target: {fileID: 3424648139555526723}
+        m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
+        m_MethodName: Handle_HowToPlayClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1025,8 +1023,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ApplicationFlowStateMachine, Assembly-CSharp
+      - m_Target: {fileID: 3424648139555526723}
+        m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
         m_MethodName: Handle_ExitClicked
         m_Mode: 1
         m_Arguments:
