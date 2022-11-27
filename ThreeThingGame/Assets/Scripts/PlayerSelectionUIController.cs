@@ -139,12 +139,12 @@ public class PlayerSelectionUIController : UIController
             m_PlayButton.interactable = false;
         }
 
-        Resolver.Resolve<ApplicationFlowStateMachine>().SetPlayerName(_newName, _playerNum);
+        Resolver.Resolve<GameManager>().SetPlayerName(_newName, _playerNum);
     }
 
     public void Handle_PlayClicked()
     {
-        Resolver.Resolve<ApplicationFlowStateMachine>().Handle_PlayClicked(m_randomToggle.isOn);
+        Resolver.Resolve<GameManager>().Handle_PlayClicked(m_randomToggle.isOn);
     }
 
     private void OnDestroy()

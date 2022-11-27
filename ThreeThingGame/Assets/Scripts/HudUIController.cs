@@ -38,20 +38,20 @@ public class HudUIController : UIController
     public void Handle_DebugSkipClicked()
     {
         // Skip the players turn for testing purposes during debugging
-        Resolver.Resolve<ApplicationFlowStateMachine>().SwitchControllToNextPlayer();
+        Resolver.Resolve<GameManager>().SwitchControllToNextPlayer();
     }
 
     public void Handle_BeginClicked()
     {
         m_preGameUIRoot.SetActive(false);
         m_gameUIRoot.SetActive(true);
-        Resolver.Resolve<ApplicationFlowStateMachine>().Handle_StartLevelClicked();
+        Resolver.Resolve<GameManager>().Handle_StartLevelClicked();
         Handle_TurnsRemaining(Resolver.Resolve<LevelManager>().GetNumberOfTurns());
     }
 
     public void Handle_NextLevelClicked()
     {
-        Resolver.Resolve<ApplicationFlowStateMachine>().Handle_NextLevel();
+        Resolver.Resolve<GameManager>().Handle_NextLevel();
     }
 
     public void Handle_TurnsRemaining(int _turnsLeft)
@@ -64,7 +64,7 @@ public class HudUIController : UIController
             m_postGameUIRoot.SetActive(true);
 
             // Set the scores
-            List<string> playerNames = Resolver.Resolve<ApplicationFlowStateMachine>().GetPlayerNames();
+            List<string> playerNames = Resolver.Resolve<GameManager>().GetPlayerNames();
             ScoreManager scoreManager = Resolver.Resolve<ScoreManager>();
 
             int i;
@@ -84,8 +84,8 @@ public class HudUIController : UIController
 
     private void AttachLiseners()
     {
-        Resolver.Resolve<ApplicationFlowStateMachine>().OnPlayerTurnChange += Handle_PlayerTurnChange;
-        Resolver.Resolve<ApplicationFlowStateMachine>().OnTurnsRemainingUpdated += Handle_TurnsRemaining;
+        Resolver.Resolve<GameManager>().OnPlayerTurnChange += Handle_PlayerTurnChange;
+        Resolver.Resolve<GameManager>().OnTurnsRemainingUpdated += Handle_TurnsRemaining;
     }
 
     private void DettachLiseners()
@@ -94,8 +94,8 @@ public class HudUIController : UIController
         // if the application is closing so we put a try catch here
         try
         {
-            Resolver.Resolve<ApplicationFlowStateMachine>().OnPlayerTurnChange -= Handle_PlayerTurnChange;
-            Resolver.Resolve<ApplicationFlowStateMachine>().OnTurnsRemainingUpdated -= Handle_TurnsRemaining;
+            Resolver.Resolve<GameManager>().OnPlayerTurnChange -= Handle_PlayerTurnChange;
+            Resolver.Resolve<GameManager>().OnTurnsRemainingUpdated -= Handle_TurnsRemaining;
         }
         catch { } 
     }
