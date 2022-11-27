@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class ScoreManager : MonoBehaviour
         m_Scores.Add(_playerName, 0);
     }
 
+    [Obsolete("Please use the players name for accessing the score manager")]
     public void AddPlayerToScoreList(int _playerNum)
     {
         m_Scores.Add(_playerNum, 0);
@@ -33,6 +35,7 @@ public class ScoreManager : MonoBehaviour
         m_Scores[_playerName] = currentScore;
     }
 
+    [Obsolete("Please use the players name for accessing the score manager")]
     public void IncreementScore(int _score, int _playerNum)
     {
         int currentScore = (int)m_Scores[_playerNum];
@@ -45,6 +48,7 @@ public class ScoreManager : MonoBehaviour
         return (int)m_Scores[_playerName];
     }
 
+    [Obsolete("Please use the players name for accessing the score manager")]
     public int GetScore(int _playerNum)
     {
         return (int)m_Scores[_playerNum];

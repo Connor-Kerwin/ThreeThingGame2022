@@ -17,6 +17,9 @@ public class HudUIController : UIController
     [SerializeField]
     private TMP_Text m_turnsRemainingLabel;
 
+    [SerializeField]
+    private List<TMP_Text> m_playerScoreLabels;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -46,9 +49,37 @@ public class HudUIController : UIController
         Handle_TurnsRemaining(Resolver.Resolve<LevelManager>().GetNumberOfTurns());
     }
 
+    public void Handle_NextLevelClicked()
+    {
+        Resolver.Resolve<ApplicationFlowStateMachine>().Handle_NextLevel();
+    }
+
     public void Handle_TurnsRemaining(int _turnsLeft)
     {
         m_turnsRemainingLabel.text = "Turns Left: " + _turnsLeft;
+
+        if (_turnsLeft <= 0)
+        {
+            m_gameUIRoot.SetActive(false);
+            m_postGameUIRoot.SetActive(true);
+
+            // Set the scores
+            List<string> playerNames = Resolver.Resolve<ApplicationFlowStateMachine>().GetPlayerNames();
+            ScoreManager scoreManager = Resolver.Resolve<ScoreManager>();
+
+            int i;
+            for (i = 0; i < playerNames.Count; i++)
+            {
+                string playerName = playerNames[i];
+                int score = scoreManager.GetScore(playerName);
+                m_playerScoreLabels[i].text = playerName + "'s Score: " + score.ToString();
+            }
+            // Setting I to I is intentional, please ignore error
+            for (i = i; i < 4; i++)
+            {
+                m_playerScoreLabels[i].gameObject.SetActive(false);
+            }
+        }
     }
 
     private void AttachLiseners()
@@ -64,7 +95,7 @@ public class HudUIController : UIController
         try
         {
             Resolver.Resolve<ApplicationFlowStateMachine>().OnPlayerTurnChange -= Handle_PlayerTurnChange;
-        Resolver.Resolve<ApplicationFlowStateMachine>().OnTurnsRemainingUpdated -= Handle_TurnsRemaining;
+            Resolver.Resolve<ApplicationFlowStateMachine>().OnTurnsRemainingUpdated -= Handle_TurnsRemaining;
         }
         catch { } 
     }
