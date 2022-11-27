@@ -7,7 +7,7 @@ public class JointNotifier : MonoBehaviour
 
     private void OnJointBreak(float breakForce)
     {
-        Debug.Log($"Joint breaking with force {breakForce}");
+        Debug.Log($"Joint breaking with force {breakForce}", this.gameObject);
         JointBreak?.Invoke();
     }
 
