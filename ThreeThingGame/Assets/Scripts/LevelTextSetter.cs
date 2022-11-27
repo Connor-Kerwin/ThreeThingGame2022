@@ -12,6 +12,6 @@ public class LevelTextSetter : MonoBehaviour
     void Start()
     {
         int level = Resolver.Resolve<GameManager>().GetLevelNum();
-        m_levelTitle.text = "Level: " + level.ToString();
+        m_levelTitle.text = "Level: " + (level - 1).ToString();
     }
 }

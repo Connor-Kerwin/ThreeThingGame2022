@@ -147,6 +147,11 @@ public class PlayerSelectionUIController : UIController
         Resolver.Resolve<GameManager>().Handle_PlayClicked(m_randomToggle.isOn);
     }
 
+    public void Handle_BackClicked()
+    {
+        Resolver.Resolve<GameManager>().Handle_BackToMainMenuClicked();
+    }
+
     private void OnDestroy()
     {
         Resolver.Unregister<PlayerSelectionUIController>();

@@ -8,6 +8,9 @@ using Random = System.Random;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private int m_maxLevels = 0;
+
     public Action<string> OnPlayerTurnChange;
     public Action<int> OnTurnsRemainingUpdated;
 
@@ -16,7 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject m_ball;
 
-    private int m_currentLevel = 0;
+    private int m_currentLevel = 1;
     private int m_turnsRemaining = 0;
 
     // Cached player names
@@ -39,6 +42,11 @@ public class GameManager : MonoBehaviour
         }
 
         Resolver.Register<GameManager>(this);
+    }
+
+    public void Start()
+    {
+        SceneManager.LoadScene(1);
     }
 
     public int GetLevelNum()
@@ -120,13 +128,23 @@ public class GameManager : MonoBehaviour
             m_currentPlayer = 0;
             m_turnsRemaining--;
             OnTurnsRemainingUpdated.Invoke(m_turnsRemaining);
+
+            if (m_turnsRemaining == 0)
+            {
+                m_CurrentState = GameStates.EndOfLevel;
+            }
+        }
+
+        // Begin shooting
+        if (m_CurrentState != GameStates.GameLoop)
+        {
+            return;
         }
 
         // Check and set balls
         CheckBalls(m_playOrder[m_currentPlayer]);
         SetBall(m_playOrder[m_currentPlayer]);
 
-        // Begin shooting
         var shoot = Resolver.Resolve<ShootInput>();
         shoot.BeginShooting();
 
@@ -162,10 +180,10 @@ public class GameManager : MonoBehaviour
         m_CurrentState = GameStates.PlayerSelection;
     }
 
-    public void Handle_OptionsClicked()
+    public void Handle_HowToPlayClicked()
     {
         Resolver.Resolve<MainMenuUIController>().HideUI();
-        Resolver.Resolve<OptionsUIController>().ShowUI();
+        Resolver.Resolve<HowToPlayUIController>().ShowUI();
         m_CurrentState = GameStates.Options;
     }
 
@@ -176,7 +194,7 @@ public class GameManager : MonoBehaviour
 
     public void Handle_BackToMainMenuClicked()
     {
-        Resolver.Resolve<OptionsUIController>().HideUI();
+        Resolver.Resolve<HowToPlayUIController>().HideUI();
         Resolver.Resolve<PlayerSelectionUIController>().HideUI();
         Resolver.Resolve<MainMenuUIController>().ShowUI();
         m_CurrentState = GameStates.MainMenu;
@@ -206,7 +224,7 @@ public class GameManager : MonoBehaviour
 
         Resolver.Resolve<PlayerSelectionUIController>().HideUI();
         m_CurrentState = GameStates.LoadLevel;
-        m_currentLevel = 1;
+        m_currentLevel = 2;
 
         SceneManager.LoadScene(m_currentLevel);
 
@@ -285,11 +303,32 @@ public class GameManager : MonoBehaviour
     public void Handle_NextLevel()
     {
         m_CurrentState = GameStates.LoadLevel;
+
+        // Check to make sure we are not at the end of the levels
+        if ((m_currentLevel - 1) == m_maxLevels)
+        {
+            m_currentLevel = 1;
+            SceneManager.LoadScene(m_currentLevel);
+            m_CurrentState = GameStates.MainMenu;
+
+            m_player1Name = string.Empty;
+            m_player2Name = string.Empty;
+            m_player3Name = string.Empty;
+            m_player4Name = string.Empty;
+            return;
+        }
+
         m_currentLevel++;
 
         SceneManager.LoadScene(m_currentLevel);
 
         m_CurrentState = GameStates.BeginLevel;
+    }
+
+    public void AddTurn()
+    {
+        m_turnsRemaining++;
+        OnTurnsRemainingUpdated.Invoke(m_turnsRemaining);
     }
 
     // Checks to ensure a player has balls
